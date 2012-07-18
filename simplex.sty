@@ -1,0 +1,19 @@
+% two simple example environments
+\newcounter{exampleno}
+\setcounter{exampleno}{0}
+
+\newenvironment{example}[1][]%
+{\vspace{0.5\baselineskip}
+\noindent\ignorespaces
+\refstepcounter{exampleno}%
+(\arabic{exampleno})~~\protect #1: 
+
+\vspace{0.25\baselineskip}}
+{\ignorespacesafterend\vspace{0.5\baselineskip}\noindent}
+
+\newenvironment{unlabeledexample}%
+{\vspace{0.5\baselineskip}
+\noindent\ignorespaces
+\refstepcounter{exampleno}%
+(\arabic{exampleno})~~}
+{\ignorespacesafterend\vspace{0.5\baselineskip}\noindent}

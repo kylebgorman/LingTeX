@@ -1,0 +1,7 @@
+\usepackage{paralist}
+\let\olditem\item
+\renewenvironment{thebibliography}[1]{%
+  \section*{\refname}
+  \let\par\relax\let\newblock\relax
+  \renewcommand{\item}[1][]{\olditem[]}%
+  \inparaenum}{\endinparaenum}
