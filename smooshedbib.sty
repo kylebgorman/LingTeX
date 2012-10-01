@@ -1,7 +1,8 @@
+% eliminate spaces between your bib items, otherwise maintaining your chosen style
 \usepackage{paralist}
 \let\olditem\item
 \renewenvironment{thebibliography}[1]{%
-  \section*{\refname}
+  \section*{\refname} % delete this line to eliminate the "References" entry
   \let\par\relax\let\newblock\relax
   \renewcommand{\item}[1][]{\olditem[]}%
   \inparaenum}{\endinparaenum}

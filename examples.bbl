@@ -1,0 +1,25 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Baroni(2009)]{Baroni2009}
+M.~Baroni.
+\newblock Distributions in text.
+\newblock In A.~L\"udeling and M.~Ky\"oto, editors, \emph{Corpus linguistics:
+  An international handbook}, pages 803--821. Mouton de Gruyter, 2009.
+
+\bibitem[Heslin(1987)]{Heslin1987}
+T.~P. Heslin.
+\newblock Prefixation in {Latin}.
+\newblock \emph{Lingua}, 72\penalty0 (2--3):\penalty0 133--154, 1987.
+
+\bibitem[Zipf(1949)]{Zipf1949}
+G.~K. Zipf.
+\newblock \emph{Human behavior and the principle of least effort: An
+  introduction to human ecology}.
+\newblock Addison-Wesley, Cambridge, 1949.
+
+\end{thebibliography}
