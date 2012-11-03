@@ -1,19 +1,27 @@
-% two simple example environments
+% three simple example environments
 \newcounter{exampleno}
 \setcounter{exampleno}{0}
+% FIXME...option to reset at end of chapter?
 
+% full size example
 \newenvironment{example}[1][]%
-{\vspace{0.5\baselineskip}
-\noindent\ignorespaces
+{\noindent\begin{minipage}{\linewidth}\vspace{0.5\baselineskip}%
 \refstepcounter{exampleno}%
-(\arabic{exampleno})~~\protect #1: 
+(\arabic{exampleno})~~\protect #1:\vspace{0.25\baselineskip}
 
-\vspace{0.25\baselineskip}}
-{\ignorespacesafterend\vspace{0.5\baselineskip}\noindent}
+\ignorespaces}
+{\ignorespacesafterend\vspace{0.5\baselineskip}\end{minipage}}
 
+% example with no label, but ample spacing
 \newenvironment{unlabeledexample}%
-{\vspace{0.5\baselineskip}
-\noindent\ignorespaces
-\refstepcounter{exampleno}%
+{\noindent\begin{minipage}{\linewidth}\vspace{0.5\baselineskip}%
+\noindent\ignorespaces\refstepcounter{exampleno}%
 (\arabic{exampleno})~~}
-{\ignorespacesafterend\vspace{0.5\baselineskip}\noindent}
+{\ignorespacesafterend\vspace{0.5\baselineskip}\end{minipage}}
+
+% example with a label but no spacing
+\newenvironment{shortexample}[1][]%
+{\noindent\begin{minipage}{\linewidth}\vspace{0.5\baselineskip}%
+\noindent\ignorespaces\refstepcounter{exampleno}%
+\noindent(\arabic{exampleno})~~\protect #1:~~\ignorespaces}
+{\ignorespacesafterend\vspace{0.5\baselineskip}\end{minipage}}
