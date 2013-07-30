@@ -13,7 +13,9 @@
 \newenvironment{example}[1][]%
 {\noindent\begin{minipage}{\linewidth}\vspace{\baselineskip}%
 \refstepcounter{exampleno}%
-\noindent(\arabic{exampleno})~~\protect #1:~~\ignorespaces}
+(\arabic{exampleno})~~\protect #1:~~
+
+\ignorespaces}
 {\ignorespacesafterend\vspace{\baselineskip}\end{minipage}}
 
 % example with no label, but ample spacing
