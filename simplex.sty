@@ -1,3 +1,9 @@
+% simplex.sty: Stuff for writing phonology papers
+% Kyle Gorman <gormanky@ohsu.edu>
+% No support offered or implied: sorry!
+
+%% original material--KG
+
 % three simple example environments
 \newcounter{exampleno}
 \setcounter{exampleno}{0}
@@ -5,23 +11,156 @@
 
 % full size example
 \newenvironment{example}[1][]%
-{\noindent\begin{minipage}{\linewidth}\vspace{0.5\baselineskip}%
+{\noindent\begin{minipage}{\linewidth}\vspace{\baselineskip}%
 \refstepcounter{exampleno}%
-(\arabic{exampleno})~~\protect #1:\vspace{0.25\baselineskip}
-
-\ignorespaces}
-{\ignorespacesafterend\vspace{0.5\baselineskip}\end{minipage}}
+\noindent(\arabic{exampleno})~~\protect #1:~~\ignorespaces}
+{\ignorespacesafterend\vspace{\baselineskip}\end{minipage}}
 
 % example with no label, but ample spacing
 \newenvironment{unlabeledexample}%
-{\noindent\begin{minipage}{\linewidth}\vspace{0.5\baselineskip}%
+{\noindent\begin{minipage}{\linewidth}\vspace{\baselineskip}%
 \noindent\ignorespaces\refstepcounter{exampleno}%
 (\arabic{exampleno})~~}
-{\ignorespacesafterend\vspace{0.5\baselineskip}\end{minipage}}
+{\ignorespacesafterend\vspace{\baselineskip}\end{minipage}}
 
 % example with a label but no spacing
 \newenvironment{shortexample}[1][]%
-{\noindent\begin{minipage}{\linewidth}\vspace{0.5\baselineskip}%
+{\noindent\begin{minipage}{\linewidth}\vspace{\baselineskip}%
 \noindent\ignorespaces\refstepcounter{exampleno}%
 \noindent(\arabic{exampleno})~~\protect #1:~~\ignorespaces}
-{\ignorespacesafterend\vspace{0.5\baselineskip}\end{minipage}}
+{\ignorespacesafterend\vspace{\baselineskip}\end{minipage}}
+
+%% the following was adapted from covington.sty--KG
+
+\@ifundefined{new@fontshape}%
+   {\def\@selfnt{\ifx\@currsize\normalsize\@normalsize\else\@currsize\fi}}
+   {\def\@selfnt{\selectfont}}
+   % Thanks to Hans-Peter Kolb for this macro.
+
+\def\gll                 % Introduces 2-line text-and-gloss.
+   {\begin{flushleft}
+\vskip\baselineskip%      % Added 1992 Nov 8 to force single spacing
+\def\baselinestretch{1}%
+\@selfnt%
+\vskip-\baselineskip%
+    \bgroup
+    \catcode`\^^M=12
+    \twosent
+   }
+
+\def\glll                 % Introduces 3-line text-and-gloss.
+   {\begin{flushleft}
+\vskip\baselineskip%      % Added 1992 Nov 8 to force single spacing
+\def\baselinestretch{1}%
+\@selfnt%
+\vskip-\baselineskip%
+    \bgroup
+    \catcode`\^^M=12
+    \threesent
+   }
+
+\def\glt{{\hskip -\glossglue}\unhbox\gline\smallskip\newline}  % \newline was \\
+                           % Introduces translation.
+                           % Required even if no translation follows.
+
+\def\gln{{\hskip -\glossglue}\unhbox\gline\hfill}
+                           % Alternative to glt, when one wants to
+                           % put a number but no translation.
+
+\def\glend{\end{flushleft}}  % Ends the gloss environment.
+
+% The following TeX code is adapted, with permission, from:
+% gloss.tex: Macros for vertically aligning words in consecutive sentences.
+% Version: 1.0  release: 26 November 1990
+% Copyright (c) 1991 Marcel R. van der Goot (marcel@cs.caltech.edu).
+% Original gloss.tex and gloss.doc are available from
+% csvax.cs.caltech.edu [131.215.131.131] in pub/tex
+% and many other anonymous ftp archives.
+
+\newbox\lineone % boxes with words from first line
+\newbox\linetwo
+\newbox\linethree
+\newbox\wordone % a word from the first line (hbox)
+\newbox\wordtwo
+\newbox\wordthree
+\newbox\gline % the constructed double line (hbox)
+\newskip\glossglue % extra glue between glossed pairs or triples
+% \glossglue = 0pt plus 2pt minus 1pt % allow stretch/shrink between words
+\glossglue = 5pt plus 2pt minus 1pt % allow stretch/shrink between words
+\newif\ifnotdone
+
+\let\eachwordone=\rm
+\let\eachwordtwo=\rm
+\let\eachwordthree=\rm
+
+\def\lastword#1#2#3% #1 = \each, #2 = line box, #3 = word box
+   {\setbox#2=\vbox{\unvbox#2%
+                    \global\setbox#3=\lastbox
+                   }%
+    \ifvoid#3\global\setbox#3=\hbox{#1\strut{} }\fi
+        % extra space following \strut in case #1 needs a space
+   }
+
+\def\testdone
+   {\ifdim\ht\lineone=0pt
+         \ifdim\ht\linetwo=0pt \notdonefalse % tricky space after pt
+         \else\notdonetrue
+         \fi
+    \else\notdonetrue
+    \fi
+   }
+
+{\catcode`\^^M=12 \endlinechar=-1 % 12 = other
+\gdef\getwords(#1,#2)#3 #4^^M% #1=linebox, #2=\each, #3=1st word, #4=remainder
+   {\setbox#1=\vbox{\hbox{#2\strut#3 }% adds space
+                    \unvbox#1%
+                   }%
+    \def\more{#4}%
+    \ifx\more\empty\let\more=\donewords
+    \else\let\more=\getwords
+    \fi
+    \more(#1,#2)#4^^M%
+   }
+
+\gdef\donewords(#1,#2)^^M{}%
+
+\gdef\twosent#1^^M#2^^M% #1 = first line, #2 = second line
+   {\getwords(\lineone,\eachwordone)#1 ^^M%
+    \getwords(\linetwo,\eachwordtwo)#2 ^^M%
+    \loop\lastword{\eachwordone}{\lineone}{\wordone}%
+         \lastword{\eachwordtwo}{\linetwo}{\wordtwo}%
+         \global\setbox\gline=\hbox{\unhbox\gline
+                                    \hskip\glossglue
+                                    \vtop{\box\wordone   % vtop was vbox
+                                          \nointerlineskip
+                                          \box\wordtwo
+                                         }%
+                                   }%
+         \testdone
+         \ifnotdone
+    \repeat
+    \egroup % matches \bgroup in \gloss
+   }
+
+\gdef\threesent#1^^M#2^^M#3^^M% #1 = first line, #2 = second line, #3 = third
+   {\getwords(\lineone,\eachwordone)#1 ^^M%
+    \getwords(\linetwo,\eachwordtwo)#2 ^^M%
+    \getwords(\linethree,\eachwordthree)#3 ^^M%
+    \loop\lastword{\eachwordone}{\lineone}{\wordone}%
+         \lastword{\eachwordtwo}{\linetwo}{\wordtwo}%
+         \lastword{\eachwordthree}{\linethree}{\wordthree}%
+         \global\setbox\gline=\hbox{\unhbox\gline
+                                    \hskip\glossglue
+                                    \vtop{\box\wordone   % vtop was vbox
+                                          \nointerlineskip
+                                          \box\wordtwo
+                                          \nointerlineskip
+                                          \box\wordthree
+                                         }%
+                                   }%
+         \testdone
+         \ifnotdone
+    \repeat
+    \egroup % matches \bgroup in \gloss
+   }
+} % restore \catcode`\^^M
