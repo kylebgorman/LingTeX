@@ -4,33 +4,25 @@
 
 %% original material--KG
 
-% three simple example environments
 \newcounter{exampleno}
 \setcounter{exampleno}{0}
 % FIXME...option to reset at end of chapter?
 
-% full size example
-\newenvironment{example}[1][]%
-{\noindent\begin{minipage}{\linewidth}\vspace{\baselineskip}%
-\refstepcounter{exampleno}%
-(\arabic{exampleno})~~\protect #1:~~
-
-\ignorespaces}
-{\ignorespacesafterend\vspace{\baselineskip}\end{minipage}}
-
-% example with no label, but ample spacing
+% Example with no label.
 \newenvironment{unlabeledexample}%
-{\noindent\begin{minipage}{\linewidth}\vspace{\baselineskip}%
-\noindent\ignorespaces\refstepcounter{exampleno}%
-(\arabic{exampleno})~~}
-{\ignorespacesafterend\vspace{\baselineskip}\end{minipage}}
+{\begin{flushleft}\refstepcounter{exampleno}\noindent(\arabic{exampleno})~~\ignorespaces\noindent\ignorespaces}%
+{\end{flushleft}\ignorespacesafterend}
 
-% example with a label but no spacing
+% Example with same-line label.
 \newenvironment{shortexample}[1][]%
-{\noindent\begin{minipage}{\linewidth}\vspace{\baselineskip}%
-\noindent\ignorespaces\refstepcounter{exampleno}%
-\noindent(\arabic{exampleno})~~\protect #1:~~\ignorespaces}
-{\ignorespacesafterend\vspace{\baselineskip}\end{minipage}}
+{\begin{flushleft}\refstepcounter{exampleno}\noindent(\arabic{exampleno})~~\protect #1:~~\noindent\ignorespaces}
+{\end{flushleft}\ignorespacesafterend}
+
+% Example with separate-line label.
+\newenvironment{example}[1][]%
+{\begin{flushleft}
+\refstepcounter{exampleno}\noindent(\arabic{exampleno})~~\protect #1:\vskip.8\baselineskip\noindent\ignorespaces}
+{\end{flushleft}\ignorespacesafterend}
 
 %% the following was adapted from covington.sty--KG
 
@@ -40,36 +32,28 @@
    % Thanks to Hans-Peter Kolb for this macro.
 
 \def\gll                 % Introduces 2-line text-and-gloss.
-   {\begin{flushleft}
-\vskip\baselineskip%      % Added 1992 Nov 8 to force single spacing
-\def\baselinestretch{1}%
+{\def\baselinestretch{1}%
 \@selfnt%
-\vskip-\baselineskip%
     \bgroup
     \catcode`\^^M=12
     \twosent
-   }
+}
 
 \def\glll                 % Introduces 3-line text-and-gloss.
-   {\begin{flushleft}
-\vskip\baselineskip%      % Added 1992 Nov 8 to force single spacing
-\def\baselinestretch{1}%
+{\def\baselinestretch{1}%
 \@selfnt%
-\vskip-\baselineskip%
     \bgroup
     \catcode`\^^M=12
     \threesent
-   }
+}
 
-\def\glt{{\hskip -\glossglue}\unhbox\gline\smallskip\newline}  % \newline was \\
-                           % Introduces translation.
-                           % Required even if no translation follows.
-
-\def\gln{{\hskip -\glossglue}\unhbox\gline\hfill}
+\def\glt{\hskip-\glossglue\unhbox\gline\smallskip\newline \hskip 10em}  % \newline was \\
+%                           % Introduces translation.
+%                           % Required even if no translation follows.
+\def\gln{\hskip-\glossglue\unhbox\gline}
                            % Alternative to glt, when one wants to
                            % put a number but no translation.
-
-\def\glend{\end{flushleft}}  % Ends the gloss environment.
+\def\glend{}  % Ends the gloss environment; technically no-op.
 
 % The following TeX code is adapted, with permission, from:
 % gloss.tex: Macros for vertically aligning words in consecutive sentences.

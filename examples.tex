@@ -3,48 +3,84 @@
 \usepackage[round]{natbib}
 \usepackage{smooshedbib}
 \usepackage{fullpage}
-
-\usepackage{mathspec}
-\setmainfont[Mapping=tex-text]{Linux Libertine}
-\setmathfont(Digits,Greek,Latin){Linux Libertine}
+\usepackage{libertinus}
 
 \begin{document}
 
-\section{A morphonological example}
+\section{Examples}
 
-Latin verb roots ending in a coronal stop take the \emph{-s-} perfect allomorph and many verbs have corresponding agent nominals in \emph{-sor}. \citet{Heslin1987} observes that root-final coronal is assibilated after short vowels, as in (\ref{sperfects}a), and deleted before long nuclei, as in (\ref{sperfects}b).
+The \texttt{example} environment produces a consecutively numbered example. A printed label must be provided as an argument; this is used to name, describe, and/or cite what follows, and is rendered with a trailing colon and a blank line.
 
-\begin{example}[Perfect passive participles and agents]
-\vskip\baselineskip
-\begin{tabular}{l l l l l l l}
-a. & \emph{metere}   & `reap'    & \emph{messus}  & `harvested' & \emph{messor}  & `reaper'   \\
-   & \emph{fodere}   & `dig'     & \emph{fossus}  & `dug'       & \emph{fossor}  & `digger'   \\
-b. & \emph{plaudere} & `applaud' & \emph{plausus} & `applauded' & \emph{plausor} & `cheerer'  \\
-   & \emph{lūdere}   & `play'    & \emph{lūsus}   & `played'    & \emph{lūsor}   & `player' \\
+For example, Latin verb roots ending in a coronal stop take the \emph{-s-} perfect allomorph and many verbs have corresponding agent nominals in \emph{-sor}. \citet{Heslin1987} observes that root-final coronal is assibilated after short vowels, as in (\ref{ex:perfects-assibilate}),
+and deleted before long nuclei, as in (\ref{ex:perfects-delete}).
+
+\begin{example}[Assibilating perfect passive participles and agents]
+\label{ex:perfects-assibilate}
+\begin{tabular}[H]{llllll}
+\emph{metere} & `reap' & \emph{messus} & `harvested' & \emph{messor} & `reaper' \\
+\emph{fodere} & `dig'  & \emph{fossus} & `dug'       & \emph{fossor} & `digger' \\
 \end{tabular}
-\label{sperfects}
 \end{example}
 
-\section{A gloss example}
+\begin{example}[Deleting perfect passive participles and agents]
+\label{ex:perfects-delete}
+\begin{tabular}[H]{llllll}
+\emph{plaudere} & `applaud' & \emph{plausus} & `applauded' & \emph{plausor} & `cheerer'  \\
+\emph{lūdere}   & `play'    & \emph{lūsus}   & `played'    & \emph{lūsor}   & `player' \\
+\end{tabular}
+\end{example}
 
-\citet{Albright2005} observes that word-final *\emph{-ōs} scans as heavy \emph{-ōr} in the fragments of Ennius. 
-At first blush, this suggests that leveling began before \textsc{Pre-Liquid Shortening} was actuated, preserving the allomorphy-reduction hypothesis.
-However, word-final consonants syllabify as the onsets of following vowel-initial words (\citealt{Allen1978}:127) and in all of \citeauthor{Albright2005}'s examples, such as the following, word-final \emph{r} is followed by a vowel.
+This environment also works well with interlinear glosses, for which we borrow from \texttt{covington.sty}. The syntax is the same except that \verb|\glend| is now no-op and can be omitted.
+
+\citet{Albright2005} observes that word-final *\emph{-ōs} scans as heavy \emph{-ōr} in the fragments of Ennius. At first blush, this suggests that leveling began before \textsc{Pre-Liquid Shortening} was actuated, preserving the allomorphy-reduction hypothesis. However, word-final consonants syllabify as the onsets of following vowel-initial words (\citealt{Allen1978}:127) and in all of \citeauthor{Albright2005}'s examples, such as the following, word-final \emph{r} is followed by a vowel.
 
 \begin{example}[\textsc{Pre-Liquid Shortening} bled by external sandhi]
 \gll \emph{clāmōr}=\emph{ad} \emph{cael-um}          \emph{uolu-e-nd-us}                                \emph{per}=\emph{aether-a}
      shout=to                heaven-\textsc{acc.sg.} roll-\textsc{t}-\textsc{fut.pass}-\textsc{nom.sg.} through=heaven-\textsc{acc.pl.}
 \glt `a shout fit to roll up to heaven' (fragments of Ennius)
-\glend
+% Omitted---noop.
+%\glend
 \end{example}
 
-\section{A mathematical example}
+\section{Short examples}
 
-\citet{Zipf1949} notes a linear relationship between log word frequency $r$ and log frequency $r$. A generalized form of this relationship, shown in (\ref{zipf}), is what is now known as Zipf's Law \citep[e.g.,][]{Baroni2009}.
+The \texttt{shortexample} environment is similar to the \texttt{example} environment except the label appears on the same line. It can be used for
 
-\begin{unlabeledexample} \label{zipf}
+\begin{itemize}
+\item simple rules that fit on a single line, or
+\item lists of words and glosses (i.e., showing a particular property).
+\end{itemize}
+
+For example, in Korean, [ʃ] is a pure allophone of [s].
+
+\begin{shortexample}[Korean secondary palatalization]
+s~$\rightarrow$~~ʃ~/~\rule{1em}{.5pt}~i
+\label{ex:palatalization}
+\end{shortexample}
+
+\section{Unlabeled examples}
+
+The \texttt{unlabeledexample} environment can be used for
+
+\begin{itemize}
+\item data tables that don't require an explicit label, or
+\item mathematical equations.
+\end{itemize}
+
+\citet{Zipf1949} notes a linear relationship between log word frequency $r$ and log frequency $r$. A generalized form of this relationship, shown in (\ref{ex:zipf}), is what is now known as Zipf's Law \citep[e.g.,][]{Baroni2009}.
+
+\begin{unlabeledexample}
+\label{ex:zipf}
 $\displaystyle f(C, \alpha) = \frac{C}{r^\alpha}$
 \end{unlabeledexample}
+
+\begin{unlabeledexample}
+$e = mc^2$
+\end{unlabeledexample}
+
+\section{Smooshed bibliographies}
+
+Highly compact \texttt{natbib} bibliographies can be generated by using the \texttt{smooshedbib} package. Note that this is compatible with the \texttt{abbvnat} bibliography style but may not work with arbitrary styles.
 
 \bibliography{\jobname}
 \bibliographystyle{abbrvnat}
