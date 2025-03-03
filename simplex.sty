@@ -15,12 +15,12 @@
 
 % Example with same-line label.
 \newenvironment{shortexample}[1][]%
-{\begin{flushleft}\refstepcounter{exampleno}\noindent(\arabic{exampleno})~~\protect #1:~~\noindent\ignorespaces}
+{\begin{flushleft}\refstepcounter{exampleno}\noindent(\arabic{exampleno})~~\protect #1:~~\noindent\ignorespaces}%
 {\end{flushleft}\ignorespacesafterend}
 
 % Example with separate-line label.
 \newenvironment{example}[1][]%
-{\begin{flushleft}\refstepcounter{exampleno}\noindent(\arabic{exampleno})~~\protect #1:\vskip.5\baselineskip\ignorespaces\noindent}
+{\begin{flushleft}\refstepcounter{exampleno}\noindent(\arabic{exampleno})~~\protect #1:\vskip.5\baselineskip\ignorespaces\noindent}%
 {\end{flushleft}\ignorespacesafterend}
 
 %% the following was adapted from covington.sty--KG
